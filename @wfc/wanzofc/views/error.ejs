@@ -1,0 +1,14 @@
+<div class="container mt-5 text-center">
+    <div class="py-5 px-4 bg-white rounded-lg shadow-lg">
+        <i class="fas <%= errorCode === 404 ? 'fa-ghost' : 'fa-bomb' %> fa-5x text-danger mb-4"></i>
+        <h1 class="display-1 fw-bold text-primary"><%= errorCode %></h1>
+        <h2 class="display-4 mb-3"><%= title %></h2>
+        <p class="lead text-muted mb-4"><%= errorMessage %></p>
+        <a href="/" class="btn btn-primary btn-lg">
+            <i class="fas fa-home me-2"></i>Go to Homepage
+        </a>
+        <% if (currentUser && currentUser.role === 'admin') { %>
+            <p class="mt-4 small text-muted">Admin Debug: Check server logs for more details.</p>
+        <% } %>
+    </div>
+</div>

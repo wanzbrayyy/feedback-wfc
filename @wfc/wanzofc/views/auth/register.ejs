@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <div class="card-header bg-primary text-white text-center">
+                <h3 class="fw-light my-4"><i class="fas fa-user-plus me-2"></i>Create Your Account</h3>
+            </div>
+            <div class="card-body p-4">
+                <form action="/auth/register" method="POST">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control <%= (typeof errors !== 'undefined' && errors.find(e => e.param === 'username' || (e.msg && e.msg.toLowerCase().includes('username')))) ? 'is-invalid' : '' %>" id="username" name="username" placeholder="Username" value="<%= typeof username !== 'undefined' ? username : '' %>" required>
+                        <label for="username"><i class="fas fa-user me-2"></i>Username</label>
+                        <% if (typeof errors !== 'undefined' && errors.find(e => e.param === 'username' || (e.msg && e.msg.toLowerCase().includes('username')))) { %>
+                            <div class="invalid-feedback">
+                                <%= errors.find(e => e.param === 'username' || (e.msg && e.msg.toLowerCase().includes('username'))).msg %>
+                            </div>
+                        <% } %>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control <%= (typeof errors !== 'undefined' && errors.find(e => e.param === 'email' || (e.msg && e.msg.toLowerCase().includes('email')))) ? 'is-invalid' : '' %>" id="email" name="email" placeholder="name@example.com" value="<%= typeof email !== 'undefined' ? email : '' %>" required>
+                        <label for="email"><i class="fas fa-envelope me-2"></i>Email address</label>
+                         <% if (typeof errors !== 'undefined' && errors.find(e => e.param === 'email' || (e.msg && e.msg.toLowerCase().includes('email')))) { %>
+                            <div class="invalid-feedback">
+                                <%= errors.find(e => e.param === 'email' || (e.msg && e.msg.toLowerCase().includes('email'))).msg %>
+                            </div>
+                        <% } %>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control <%= (typeof errors !== 'undefined' && errors.find(e => e.param === 'password' || (e.msg && e.msg.toLowerCase().includes('password')))) ? 'is-invalid' : '' %>" id="password" name="password" placeholder="Password" required>
+                        <label for="password"><i class="fas fa-lock me-2"></i>Password</label>
+                         <% if (typeof errors !== 'undefined' && errors.find(e => e.param === 'password' || (e.msg && e.msg.toLowerCase().includes('password ') && !e.msg.toLowerCase().includes('match')))) { %>
+                            <div class="invalid-feedback">
+                                <%= errors.find(e => e.param === 'password' || (e.msg && e.msg.toLowerCase().includes('password ') && !e.msg.toLowerCase().includes('match'))).msg %>
+                            </div>
+                        <% } %>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control <%= (typeof errors !== 'undefined' && errors.find(e => e.param === 'password2' || (e.msg && e.msg.toLowerCase().includes('match')))) ? 'is-invalid' : '' %>" id="password2" name="password2" placeholder="Confirm Password" required>
+                        <label for="password2"><i class="fas fa-check-double me-2"></i>Confirm Password</label>
+                        <% if (typeof errors !== 'undefined' && errors.find(e => e.param === 'password2' || (e.msg && e.msg.toLowerCase().includes('match')))) { %>
+                            <div class="invalid-feedback">
+                                <%= errors.find(e => e.param === 'password2' || (e.msg && e.msg.toLowerCase().includes('match'))).msg %>
+                            </div>
+                        <% } %>
+                    </div>
+
+                    <div class="d-grid mt-4 mb-0">
+                        <button type="submit" class="btn btn-primary btn-lg fw-bold"><i class="fas fa-paper-plane me-2"></i>Register</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center py-3 bg-light">
+                <div class="small">Already have an account? <a href="/auth/login" class="text-primary fw-semibold"><i class="fas fa-sign-in-alt ms-1"></i>Login here!</a></div>
+            </div>
+        </div>
+    </div>
+</div>

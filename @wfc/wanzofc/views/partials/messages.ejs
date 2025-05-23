@@ -1,0 +1,38 @@
+<% if (success_msg && success_msg.length > 0) { %>
+    <% success_msg.forEach(function(message) { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i><%= message %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% }); %>
+<% } %>
+
+<% if (error_msg && error_msg.length > 0) { %>
+    <% error_msg.forEach(function(message) { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i><%= message %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% }); %>
+<% } %>
+
+<% if (error && error.length > 0) { %> <!-- Untuk error dari Passport.js jika digunakan -->
+    <% error.forEach(function(message) { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i><%= message %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% }); %>
+<% } %>
+
+<% if (typeof errors !== 'undefined' && errors && errors.length > 0) { %> <!-- Untuk error array dari validasi form -->
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <h5 class="alert-heading"><i class="fas fa-exclamation-circle me-2"></i>Please correct the following errors:</h5>
+        <ul>
+            <% errors.forEach(function(err) { %>
+                <li><%= err.msg %></li>
+            <% }); %>
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>

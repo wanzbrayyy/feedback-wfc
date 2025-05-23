@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <div class="card-header bg-primary text-white text-center">
+                <h3 class="fw-light my-4"><i class="fas fa-sign-in-alt me-2"></i>Login to Your Account</h3>
+            </div>
+            <div class="card-body p-4">
+                <form action="/auth/login" method="POST">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                        <label for="username"><i class="fas fa-user me-2"></i>Username</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                        <label for="password"><i class="fas fa-lock me-2"></i>Password</label>
+                    </div>
+                    <!-- <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
+                        <label class="form-check-label" for="rememberPasswordCheck">
+                            Remember password
+                        </label>
+                    </div> -->
+                    <div class="d-grid mt-4 mb-0">
+                        <button type="submit" class="btn btn-primary btn-lg fw-bold"><i class="fas fa-paper-plane me-2"></i>Login</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center py-3 bg-light">
+                <div class="small"><a href="/auth/register" class="text-primary fw-semibold">Need an account? <i class="fas fa-user-plus ms-1"></i>Sign up!</a></div>
+            </div>
+        </div>
+    </div>
+</div>

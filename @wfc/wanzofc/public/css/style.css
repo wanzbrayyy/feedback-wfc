@@ -1,0 +1,82 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5; /* Softer background */
+}
+
+.navbar-brand img {
+    animation: spin 4s linear infinite; /* Subtle logo animation */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+.card-header {
+    border-bottom-width: 3px; /* Thicker border for card headers */
+}
+
+.btn {
+    transition: all 0.2s ease-in-out;
+    /* text-transform: uppercase; */ /* Optional: for more "striking" buttons */
+    /* letter-spacing: 0.5px; */
+    font-weight: 500;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background-color: #0056b3; /* Slightly darker primary */
+    border-color: #004085;
+}
+.btn-primary:hover {
+    background-color: #004085;
+    border-color: #00376e;
+}
+
+.table th i, .table td .badge i {
+    /* color: #0056b3; */ /* Icon color in table headers */
+    margin-right: 0.3rem;
+}
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 86, 179, 0.05); /* Subtle hover for table rows */
+}
+
+.form-control:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 0 0.25rem rgba(0, 86, 179, 0.25);
+}
+
+.alert {
+    border-left-width: 5px;
+}
+.alert-success { border-left-color: var(--bs-success); }
+.alert-danger { border-left-color: var(--bs-danger); }
+.alert-warning { border-left-color: var(--bs-warning); }
+.alert-info { border-left-color: var(--bs-info); }
+
+/* Custom styling for a "modern/striking" feel */
+.display-6, .display-5, .display-4, .display-1 {
+    color: #333; /* Darker text for headings */
+}
+
+.bg-primary {
+    /* Example of a gradient if you want something more "striking" */
+    /* background-image: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important; */
+}
+
+.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+}
+
+/* Navbar active link style */
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .show>.nav-link {
+    color: #fff;
+    /* background-color: rgba(255, 255, 255, 0.15); */
+    /* border-bottom: 2px solid #fff; */
+}

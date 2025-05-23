@@ -1,0 +1,31 @@
+{
+  "name": "wanzofc-app",
+  "version": "1.0.0",
+  "description": "Example application using @wfc/sql library.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "wfc-sql",
+    "example",
+    "nodejs",
+    "express",
+    "ejs"
+  ],
+  "author": "wanzofc",
+  "license": "MIT",
+  "dependencies": {
+    "wanzofc-sql": "1.0.0",
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "method-override": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

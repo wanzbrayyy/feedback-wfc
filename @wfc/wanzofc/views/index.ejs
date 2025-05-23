@@ -1,0 +1,41 @@
+<div class="p-5 mb-4 bg-white rounded-3 shadow-sm">
+    <div class="container-fluid py-5 text-center">
+        <i class="fas fa-rocket fa-3x text-primary mb-3"></i>
+        <h1 class="display-5 fw-bold">Welcome to WFC Application</h1>
+        <p class="fs-4">This is a sample application demonstrating the power of <strong>@wfc/sql</strong>, a custom file-based ODM, built with Node.js, Express, and EJS.</p>
+        <% if (currentUser) { %>
+            <p class="lead">You are logged in as <strong><%= currentUser.username %></strong>.</p>
+            <a href="/users" class="btn btn-primary btn-lg mt-3">
+                <i class="fas fa-users me-2"></i>View Users
+            </a>
+            <a href="/auth/logout" class="btn btn-outline-danger btn-lg mt-3">
+                <i class="fas fa-sign-out-alt me-2"></i>Logout
+            </a>
+        <% } else { %>
+            <p class="lead">Get started by exploring or creating an account.</p>
+            <a href="/auth/login" class="btn btn-primary btn-lg mt-3">
+                <i class="fas fa-sign-in-alt me-2"></i>Login
+            </a>
+            <a href="/auth/register" class="btn btn-outline-secondary btn-lg mt-3">
+                <i class="fas fa-user-plus me-2"></i>Register
+            </a>
+        <% } %>
+    </div>
+</div>
+
+<div class="row align-items-md-stretch">
+    <div class="col-md-6 mb-4">
+        <div class="h-100 p-5 text-white bg-primary rounded-3 shadow">
+            <h2><i class="fas fa-cogs me-2"></i>About @wfc/sql</h2>
+            <p>Our custom ODM provides a Mongoose-like interface for interacting with simple JSON file databases. Perfect for learning and small projects.</p>
+            <button class="btn btn-outline-light" type="button"><i class="fab fa-github me-2"></i>View on GitHub (Soon!)</button>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="h-100 p-5 bg-white border rounded-3 shadow-sm">
+            <h2><i class="fas fa-th-large me-2"></i>Features</h2>
+            <p>This example app showcases user authentication, CRUD operations, and a responsive UI styled with Bootstrap 5 and Font Awesome.</p>
+             <button class="btn btn-outline-primary" type="button"><i class="fas fa-book-open me-2"></i>Learn More</button>
+        </div>
+    </div>
+</div>

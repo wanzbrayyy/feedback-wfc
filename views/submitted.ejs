@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-color: #0D0D2B; /* Dark Blue/Purple */
+            --secondary-color: #1A1A3D; /* Slightly lighter for card */
+            --accent-color: #3671E9; /* Bright Blue */
+            --highlight-color: #00FFA3; /* Neon Green/Teal */
+            --text-color: #FFFFFF;
+            --text-muted-color: #A0A0C0;
+            --border-radius: 15px;
+            --box-shadow: 0 15px 40px rgba(0, 255, 163, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #10102A 100%);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column; /* Allow footer to be at bottom */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .notification-card {
+            background-color: var(--secondary-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 100%;
+            max-width: 600px;
+            border: 2px solid var(--highlight-color);
+            overflow: hidden; /* For any potential pseudo-elements or animations */
+        }
+
+        .card-header {
+            background-color: rgba(0, 255, 163, 0.1);
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--highlight-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .card-header .icon-app {
+            font-size: 2.5em;
+            color: var(--highlight-color);
+            margin-right: 20px;
+            padding: 10px;
+            background-color: rgba(0,255,163,0.2);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px var(--highlight-color);
+        }
+        
+        .card-header .title-group h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6em;
+            color: var(--text-color);
+            margin: 0;
+        }
+        .card-header .title-group p {
+            font-size: 0.9em;
+            color: var(--text-muted-color);
+            margin: 0;
+        }
+
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .info-section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed rgba(255,255,255,0.15);
+        }
+        .info-section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2em;
+            color: var(--highlight-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .info-section h3 i {
+            margin-right: 12px;
+            font-size: 1.3em;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+        .info-item .label {
+            color: var(--text-muted-color);
+            min-width: 100px;
+            font-weight: 600;
+        }
+        .info-item .value {
+            color: var(--text-color);
+            word-break: break-all; /* Prevent long strings from breaking layout */
+        }
+        .info-item .value i {
+            margin-right: 8px;
+            color: var(--accent-color);
+        }
+        
+        .feedback-content {
+            background-color: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            white-space: pre-wrap; /* Preserve line breaks from textarea */
+            word-wrap: break-word;
+        }
+        
+        .timestamp-section {
+            margin-top: 25px;
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--text-muted-color);
+        }
+        .timestamp-section i {
+            margin-right: 8px;
+            color: var(--highlight-color);
+        }
+
+        .back-link {
+            margin-top: 30px;
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--text-color);
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-family: 'Orbitron', sans-serif;
+        }
+        .back-link i {
+            margin-right: 8px;
+        }
+        .back-link:hover {
+            background-color: var(--highlight-color);
+            color: var(--primary-color);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="notification-card">
+        <div class="card-header">
+            <div class="icon-app">
+                <i class="fas fa-bell"></i>
+            </div>
+            <div class="title-group">
+                <h2><i class="fas fa-check-circle" style="color: var(--highlight-color);"></i> new Feedback Received!</h2>
+                <p>NOTIFICATION NGL WANZOFC</p> 
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="info-section">
+                <h3><i class="fas fa-user-circle"></i>From:</h3>
+                <div class="info-item">
+                    <span class="label"><i class="fas fa-id-badge"></i>Name:</span>
+                    <span class="value"><%= name %></span>
+                </div>
+                <div class="info-item">
+                    <span class="label"><i class="fas fa-at"></i>Email:</span>
+                    <span class="value"><%= email %></span>
+                </div>
+                <div class="info-item">
+                    <span class="label"><i class="fab fa-whatsapp"></i>WhatsApp:</span>
+                    <span class="value"><%= whatsapp %></span>
+                </div>
+            </div>
+            <div class="info-section">
+                <h3><i class="fas fa-pencil-alt"></i>Feedback:</h3>
+                <div class="feedback-content">
+                    <p><%- feedback.replace(/\n/g, '<br>') %></p>
+                </div>
+            </div>
+            <div class="timestamp-section">
+                <i class="fas fa-clock"></i>Time: <%= timestamp.toLocaleString('id-ID', { dateStyle: 'short', timeStyle: 'medium' }) %>
+            </div>
+        </div>
+    </div>
+    <a href="/" class="back-link"><i class="fas fa-arrow-left"></i>Kirim Feedback Lain</a>
+    <script>
+    </script>
+</body>
+</html>

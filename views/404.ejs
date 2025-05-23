@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Exo+2:wght@400;600&display=swap');
+        :root {
+            --bg-primary: #0F0F2B;
+            --accent-cyan: #00FFFF;
+            --accent-magenta: #FF00FF;
+            --text-light: #E0E7FF;
+            --radius-lg: 15px;
+        }
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .error-container {
+            background-color: rgba(24, 24, 61, 0.8);
+            padding: 40px 50px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 0 30px var(--accent-cyan), 0 0 15px var(--accent-magenta) inset;
+            border: 2px solid var(--accent-cyan);
+        }
+        .error-code {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 6em;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 15px var(--accent-cyan);
+            margin-bottom: 10px;
+            animation: glitch 2s linear infinite;
+        }
+        @keyframes glitch{
+            2%,64%{ transform:translate(2px,0) skew(0deg); }
+            4%,60%{ transform:translate(-2px,0) skew(0deg); }
+            62%{ transform:translate(0,0) skew(5deg); }
+        }
+        .error-message {
+            font-size: 1.8em;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+        .error-description {
+            font-size: 1em;
+            color: #A0A8C0;
+            margin-bottom: 30px;
+        }
+        .error-url {
+            font-family: 'Roboto Mono', monospace;
+            color: var(--accent-magenta);
+            background-color: rgba(0,0,0,0.3);
+            padding: 5px 10px;
+            border-radius: 5px;
+            word-break: break-all;
+        }
+        .home-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-magenta));
+            color: var(--bg-primary);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .home-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--accent-cyan), 0 0 10px var(--accent-magenta);
+        }
+        .home-link i { margin-right: 8px; }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <div class="error-message">Oops! Halaman Hilang.</div>
+        <p class="error-description">
+            Sepertinya halaman yang Anda cari tidak ada atau telah dipindahkan.
+            <br>Path yang diminta: <span class="error-url"><%= url %></span>
+        </p>
+        <a href="/" class="home-link"><i class="fas fa-rocket"></i>Kembali ke Beranda</a>
+    </div>
+</body>
+</html>

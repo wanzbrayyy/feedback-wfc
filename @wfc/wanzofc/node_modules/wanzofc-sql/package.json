@@ -1,0 +1,37 @@
+{
+  "name": "wanzofc-sql",
+  "version": "1.0.0",
+  "description": "A simplified Mongoose-like ODM for file-based JSON databases.",
+  "main": "index.js",
+  "files": [
+    "lib",
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified yet\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wanzofc/wfc-sql.git"
+  },
+  "keywords": [
+    "database",
+    "json",
+    "file",
+    "odm",
+    "wfc",
+    "mongoose-like",
+    "local-db"
+  ],
+  "author": " <wanzofc@wanzofc.xyz> (https://wanzofc.xyz)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wanzofc/wfc-sql/issues"
+  },
+  "homepage": "https://github.com/wanzofc/wfc-sql#readme",
+  "dependencies": {
+    "uuid": "^9.0.1"
+  }
+}

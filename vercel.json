@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/submit-feedback",
+      "methods": ["POST"],
+      "dest": "/server.js"
+    },
+    {
+      "src": "/admin/dashboard",
+      "methods": ["GET"],
+      "dest": "/server.js"
+    },
+    {
+      "src": "/",
+      "methods": ["GET"],
+      "dest": "/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/server.js"
+    }
+  ],
+  "env": {
+    "MONGODB_URI": "@mongodb_uri"
+  }
+}

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Titillium+Web:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap');
+
+        :root {
+            --bg-deep-space: #03001C;
+            --bg-nebula-dark: #150050;
+            --bg-nebula-light: #3F0071;
+            --accent-starburst: #FB2576; /* Neon Pink */
+            --accent-pulsar: #00F5FF;   /* Bright Cyan */
+            --accent-supernova: #AEFEFF; /* Light Cyan/White */
+            --text-galaxy: #EAEAEA;
+            --text-cosmic-dust: #B0B0D0;
+            --glow-starburst: rgba(251, 37, 118, 0.6);
+            --glow-pulsar: rgba(0, 245, 255, 0.5);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition-fast: 0.3s;
+            --transition-smooth: 0.5s;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Titillium Web', sans-serif;
+            background: linear-gradient(135deg, var(--bg-deep-space) 0%, var(--bg-nebula-dark) 70%, var(--bg-nebula-light) 100%);
+            color: var(--text-galaxy);
+            overflow-x: hidden;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .admin-container { max-width: 1500px; margin: 0 auto; padding: 25px; }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 10px;
+            margin-bottom: 35px;
+            border-bottom: 3px solid;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(to right, var(--accent-pulsar), var(--accent-starburst));
+            box-shadow: 0 8px 25px var(--glow-pulsar);
+            background-color: rgba(21, 0, 80, 0.3);
+            backdrop-filter: blur(5px);
+            border-radius: var(--radius-md);
+        }
+        .admin-header .logo-title h1 {
+            font-family: 'Orbitron', sans-serif; font-size: 2.8em; font-weight: 900;
+            background: linear-gradient(45deg, var(--accent-pulsar), var(--accent-supernova), var(--accent-starburst));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px var(--glow-pulsar); display: flex; align-items: center;
+        }
+        .admin-header .logo-title h1 i { margin-right: 18px; font-size: 1.1em; color: var(--accent-pulsar); animation: spinPlanet 8s linear infinite; }
+        @keyframes spinPlanet { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .admin-nav a {
+            font-family: 'Orbitron', sans-serif; color: var(--text-galaxy); text-decoration: none;
+            margin-left: 30px; padding: 12px 22px; border-radius: var(--radius-sm);
+            transition: all var(--transition-fast) ease; font-weight: 700; letter-spacing: 1.2px;
+            border: 2px solid transparent; position: relative; overflow: hidden;
+        }
+        .admin-nav a::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, var(--accent-starburst), transparent);
+            transition: left var(--transition-smooth) ease; z-index: -1;
+        }
+        .admin-nav a:hover::before { left: 100%; }
+        .admin-nav a:hover, .admin-nav a.active {
+            color: var(--accent-supernova); text-shadow: 0 0 8px var(--accent-starburst);
+            border-color: var(--accent-starburst); box-shadow: 0 0 15px var(--glow-starburst);
+        }
+        .admin-nav a i { margin-right: 10px; }
+
+        .reports-section {
+            background-color: rgba(21, 0, 80, 0.6); backdrop-filter: blur(10px);
+            padding: 35px; border-radius: var(--radius-lg);
+            box-shadow: 0 0 40px rgba(0,0,0,0.5), 0 0 20px var(--glow-pulsar) inset;
+            border: 2px solid var(--accent-pulsar);
+        }
+        .reports-section h2 {
+            font-family: 'Orbitron', sans-serif; color: var(--accent-starburst); margin-bottom: 30px;
+            text-align: center; font-size: 2.4em; text-shadow: 0 0 10px var(--glow-starburst);
+        }
+        .reports-section h2 i { animation: pulseGlow 1.5s infinite ease-in-out; }
+        @keyframes pulseGlow { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+        .reports-table-wrapper { overflow-x: auto; }
+        .reports-table { width: 100%; border-collapse: separate; border-spacing: 0 15px; }
+        .reports-table th, .reports-table td { padding: 20px 25px; text-align: left; vertical-align: middle; font-family: 'Roboto Mono', monospace; }
+        .reports-table th {
+            background: linear-gradient(to right, var(--bg-nebula-light), var(--bg-nebula-dark));
+            color: var(--accent-pulsar); font-weight: 700; font-size: 1em; text-transform: uppercase;
+            letter-spacing: 1.8px; border-bottom: 3px solid var(--accent-pulsar);
+        }
+        .reports-table th:first-child { border-top-left-radius: var(--radius-md); }
+        .reports-table th:last-child { border-top-right-radius: var(--radius-md); }
+
+        .reports-table tbody tr {
+            background-color: rgba(63, 0, 113, 0.5); border-radius: var(--radius-md);
+            transition: transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease, background-color var(--transition-fast) ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5); border-left: 5px solid transparent;
+        }
+        .reports-table tbody tr:hover {
+            transform: translateY(-6px) scale(1.005); background-color: rgba(63, 0, 113, 0.8);
+            box-shadow: 0 10px 25px var(--glow-pulsar); border-left-color: var(--accent-starburst);
+        }
+        .reports-table td { font-size: 0.95em; color: var(--text-cosmic-dust); }
+        .reports-table td:first-child { border-bottom-left-radius: var(--radius-md); border-top-left-radius: var(--radius-md); }
+        .reports-table td:last-child { border-bottom-right-radius: var(--radius-md); border-top-right-radius: var(--radius-md); }
+        .reports-table .name-column { color: var(--text-galaxy); font-weight: 600; }
+        .reports-table .feedback-preview { max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .reports-table .action-btn {
+            background: linear-gradient(135deg, var(--accent-starburst), var(--accent-pulsar));
+            color: var(--bg-deep-space); padding: 10px 18px; border: none; border-radius: var(--radius-sm);
+            cursor: pointer; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.9em;
+            transition: all var(--transition-fast) ease; box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+        }
+        .reports-table .action-btn:hover { transform: scale(1.1) rotate(3deg); box-shadow: 0 5px 15px var(--glow-starburst); }
+        .reports-table .action-btn i { margin-right: 7px; }
+
+        .no-reports { text-align: center; padding: 70px 20px; font-size: 1.4em; color: var(--text-cosmic-dust); }
+        .no-reports i { font-size: 4.5em; display: block; margin-bottom: 25px; color: var(--accent-pulsar); opacity: 0.7; }
+
+        /* Modal Styles - Enhanced */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(3,0,28,0.9) 0%, rgba(21,0,80,0.95) 100%);
+            display: flex; justify-content: center; align-items: center; z-index: 1000;
+            opacity: 0; visibility: hidden; transition: opacity var(--transition-smooth) ease, visibility 0s var(--transition-smooth) linear;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; transition-delay: 0s; }
+        .modal-content {
+            background: linear-gradient(160deg, var(--bg-nebula-dark), var(--bg-deep-space));
+            padding: 40px 45px; border-radius: var(--radius-lg); width: 90%; max-width: 750px; max-height: 90vh;
+            overflow-y: auto; box-shadow: 0 0 50px var(--glow-starburst), 0 0 25px var(--glow-pulsar) inset;
+            border: 3px solid; border-image-slice: 1;
+            border-image-source: linear-gradient(to bottom right, var(--accent-starburst), var(--accent-pulsar));
+            transform: perspective(1000px) rotateY(-20deg) scale(0.8); opacity: 0;
+            transition: transform var(--transition-smooth) cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity var(--transition-smooth) ease;
+        }
+        .modal-overlay.active .modal-content { transform: perspective(1000px) rotateY(0deg) scale(1); opacity: 1; }
+        .modal-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;
+            padding-bottom: 20px; border-bottom: 2px dashed var(--accent-pulsar);
+        }
+        .modal-header h3 {
+            font-family: 'Orbitron', sans-serif; font-size: 2em;
+            background: linear-gradient(45deg, var(--accent-starburst), var(--accent-supernova));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .modal-close-btn {
+            background: none; border: none; color: var(--accent-supernova); font-size: 2.5em; cursor: pointer;
+            transition: color var(--transition-fast), transform var(--transition-fast);
+        }
+        .modal-close-btn:hover { color: var(--accent-starburst); transform: rotate(180deg) scale(1.2); }
+
+        .modal-body .info-group { margin-bottom: 25px; }
+        .modal-body .info-group strong {
+            display: block; color: var(--accent-pulsar); font-family: 'Roboto Mono', monospace;
+            font-size: 0.95em; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .modal-body .info-group strong i { margin-right: 10px; }
+        .modal-body .info-value {
+            background-color: rgba(3,0,28,0.5); padding: 15px 18px; border-radius: var(--radius-sm);
+            color: var(--text-galaxy); font-size: 1.05em; word-break: break-word;
+            border-left: 4px solid var(--accent-starburst); box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .modal-body .feedback-text-modal { white-space: pre-wrap; line-height: 1.8; max-height: 300px; overflow-y: auto; }
+        .modal-body .feedback-text-modal::-webkit-scrollbar { width: 8px; }
+        .modal-body .feedback-text-modal::-webkit-scrollbar-thumb { background-color: var(--accent-starburst); border-radius: var(--radius-sm); }
+        .modal-body .feedback-text-modal::-webkit-scrollbar-track { background-color: var(--bg-nebula-dark); }
+
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .admin-header .logo-title h1 { font-size: 2.2em; }
+            .admin-nav a { margin-left: 15px; padding: 10px 15px; font-size: 0.9em;}
+        }
+        @media (max-width: 768px) {
+            .admin-header { flex-direction: column; align-items: center; text-align: center;}
+            .admin-header .logo-title h1 { margin-bottom: 20px; }
+            .admin-nav { width: 100%; display: flex; justify-content: space-around; margin-top: 10px; }
+            .admin-nav a { margin-left: 5px; margin-right: 5px; padding: 10px; }
+            .reports-table th, .reports-table td { padding: 15px 12px; font-size: 0.9em; }
+            .reports-table .feedback-preview { max-width: 180px; }
+            .modal-content { padding: 30px 25px; }
+            .modal-header h3 { font-size: 1.7em; }
+        }
+        @media (max-width: 480px) {
+            .admin-header .logo-title h1 { font-size: 1.8em; }
+            .admin-nav a { font-size: 0.8em; padding: 8px;}
+            .reports-section h2 { font-size: 1.8em;}
+            .reports-table-wrapper { font-size: 0.85em; }
+            .reports-table .action-btn { font-size: 0.8em; padding: 8px 12px;}
+             .modal-body .info-value { font-size: 0.95em;}
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container" id="adminContainer">
+        <header class="admin-header">
+            <div class="logo-title">
+                <h1><i class="fas fa-atom"></i>Wanzofc Nexus Core</h1>
+            </div>
+            <nav class="admin-nav">
+                <a href="#" class="active" data-aos="fade-down" data-aos-delay="100"><i class="fas fa-stream"></i>Laporan</a>
+                <a href="#" data-aos="fade-down" data-aos-delay="200"><i class="fas fa-sliders-h"></i>Konfigurasi</a>
+                <a href="/" data-aos="fade-down" data-aos-delay="300"><i class="fas fa-plus-hexagon"></i>Form Baru</a>
+            </nav>
+        </header>
+
+        <main class="reports-section" data-aos="zoom-in-up" data-aos-duration="900">
+            <h2><i class="fas fa-satellite-dish"></i>Incoming Transmissions</h2>
+            <div class="reports-table-wrapper">
+                <% if (reports && reports.length > 0) { %>
+                    <table class="reports-table">
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-user-secret"></i>Agent ID</th>
+                                <th><i class="fas fa-envelope-open-text"></i>ComLink</th>
+                                <th><i class="fab fa-galactic-republic"></i>Signal (WA)</th>
+                                <th><i class="fas fa-file-signature"></i>Intel Brief</th>
+                                <th><i class="fas fa-history"></i>Timestamp</th>
+                                <th><i class="fas fa-cogs"></i>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% reports.forEach((report, index) => { %>
+                                <tr data-aos="fade-right" data-aos-delay="<%= (index * 70) + 150 %>">
+                                    <td class="name-column"><%= report.name %></td>
+                                    <td><%= report.email %></td>
+                                    <td><%= report.whatsapp %></td>
+                                    <td class="feedback-preview"><%= report.feedback %></td>
+                                    <td>
+                                        <%= new Date(report.timestamp).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) %>
+                                        <br>
+                                        <span style="font-size:0.85em; color: var(--text-cosmic-dust);"><%= new Date(report.timestamp).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) %></span>
+                                    </td>
+                                    <td>
+                                        <button class="action-btn view-report-btn" data-report-id="<%= report._id.toString() %>">
+                                            <i class="fas fa-binoculars"></i>Decrypt
+                                        </button>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                <% } else { %>
+                    <div class="no-reports" data-aos="fade-in" data-aos-duration="1000">
+                        <i class="fas fa-unlink"></i>
+                        No signals detected. All channels quiet.
+                    </div>
+                <% } %>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="reportModalOverlay">
+        <div class="modal-content" id="reportModalContent">
+            <div class="modal-header">
+                <h3 id="modalTitle"><i class="fas fa-folder-open"></i>Decrypted Transmission</h3>
+                <button class="modal-close-btn" id="modalCloseBtn">×</button>
+            </div>
+            <div class="modal-body" id="modalBodyContent">
+                <div class="info-group">
+                    <strong><i class="fas fa-id-card-alt"></i>Agent Name:</strong>
+                    <div class="info-value" id="modalReportName"></div>
+                </div>
+                <div class="info-group">
+                    <strong><i class="fas fa-broadcast-tower"></i>Communication Channel (Email):</strong>
+                    <div class="info-value" id="modalReportEmail"></div>
+                </div>
+                <div class="info-group">
+                    <strong><i class="fab fa-whatsapp-square"></i>Secure Line (WhatsApp):</strong>
+                    <div class="info-value" id="modalReportWhatsapp"></div>
+                </div>
+                <div class="info-group">
+                    <strong><i class="fas fa-stopwatch-20"></i>Time of Transmission:</strong>
+                    <div class="info-value" id="modalReportTimestamp"></div>
+                </div>
+                <div class="info-group">
+                    <strong><i class="fas fa-scroll"></i>Full Report Data:</strong>
+                    <div class="info-value feedback-text-modal" id="modalReportFeedback"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        AOS.init({
+            once: false, 
+            duration: 700,
+            easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+        });
+
+        gsap.from(".admin-header .logo-title h1", { duration: 1.2, y: -70, opacity: 0, ease: "elastic.out(1, 0.5)", delay: 0.3 });
+        gsap.from(".admin-nav a", { duration: 0.9, y: -40, opacity: 0, stagger: 0.15, ease: "back.out(1.7)", delay: 0.6 });
+        gsap.from(".reports-section h2", { duration: 1, scale: 0.7, opacity: 0, ease: "expo.out", delay: 1 });
+        
+        const reportsDataJSON = <%- reportsJSON %>;
+
+        const modalOverlay = document.getElementById('reportModalOverlay');
+        const modalContent = document.getElementById('reportModalContent');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const viewReportBtns = document.querySelectorAll('.view-report-btn');
+
+        function openModal(report) {
+            document.getElementById('modalReportName').textContent = report.name;
+            document.getElementById('modalReportEmail').textContent = report.email;
+            document.getElementById('modalReportWhatsapp').textContent = report.whatsapp;
+            document.getElementById('modalReportTimestamp').textContent = new Date(report.timestamp).toLocaleString('id-ID', { dateStyle: 'full', timeStyle: 'long' });
+            
+            const feedbackElement = document.getElementById('modalReportFeedback');
+            feedbackElement.innerHTML = ''; 
+            const lines = report.feedback.split('\n');
+            lines.forEach(line => {
+                const p = document.createElement('p');
+                p.textContent = line || '\u00A0'; // Add non-breaking space for empty lines
+                feedbackElement.appendChild(p);
+            });
+            if(lines.length === 0 && report.feedback) { 
+                 const p = document.createElement('p');
+                p.textContent = report.feedback;
+                feedbackElement.appendChild(p);
+            }
+
+            modalOverlay.classList.add('active');
+            gsap.to(modalOverlay, {duration: 0.4, opacity: 1, ease: "power2.out"});
+            gsap.fromTo(modalContent, 
+                { opacity: 0, scale: 0.8, rotationY: -30, transformPerspective: 1000 }, 
+                { duration: 0.6, opacity: 1, scale: 1, rotationY: 0, ease: "elastic.out(1, 0.75)", delay: 0.1 }
+            );
+            gsap.from(".modal-body .info-group", { duration: 0.7, y: 40, opacity:0, stagger: 0.1, delay:0.3, ease:"power3.out"});
+        }
+
+        function closeModal() {
+            gsap.to(modalContent, { 
+                duration: 0.4, 
+                opacity: 0, 
+                scale: 0.8, 
+                rotationY: 20, 
+                ease: "power2.in", 
+                onComplete: () => {
+                    modalOverlay.classList.remove('active');
+                }
+            });
+            gsap.to(modalOverlay, {duration: 0.5, opacity: 0, delay: 0.1, ease: "power2.in"});
+        }
+
+        viewReportBtns.forEach(button => {
+            button.addEventListener('click', function() {
+                const reportIdFromButton = this.dataset.reportId; // Ini sudah string dari EJS
+                // reportsDataJSON sudah memiliki 'id' sebagai string dari server
+                const selectedReport = reportsDataJSON.find(r => r.id === reportIdFromButton);
+                
+                if (selectedReport) {
+                    openModal(selectedReport);
+                } else {
+                    console.error('Report not found for ID:', reportIdFromButton, 'Available IDs in JSON:', reportsDataJSON.map(r=>r.id));
+                    alert('Detail laporan tidak ditemukan. Silakan coba lagi atau hubungi administrator.');
+                }
+            });
+        });
+
+        modalCloseBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', function(event) {
+            if (event.target === modalOverlay) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+    </script>
+</body>
+</html>

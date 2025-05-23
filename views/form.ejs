@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-color: #0D0D2B;
+            --secondary-color: #2F2F6B; 
+            --accent-color: #3671E9;
+            --highlight-color: #00FFA3; 
+            --text-color: #FFFFFF;
+            --text-muted-color: #A0A0C0;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 255, 163, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1E1E48 100%);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .form-container {
+            background-color: var(--secondary-color);
+            padding: 30px 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 100%;
+            max-width: 550px;
+            border: 1px solid var(--accent-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent,
+                transparent,
+                transparent,
+                var(--highlight-color)
+            );
+            animation: rotate 6s linear infinite;
+            z-index: 0;
+        }
+        
+        .form-container::after {
+            content: '';
+            position: absolute;
+            inset: 5px; 
+            background: var(--secondary-color);
+            border-radius: calc(var(--border-radius) - 5px);
+            z-index: 1;
+        }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(1turn);
+            }
+        }
+
+        .form-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5em;
+            color: var(--highlight-color);
+            text-shadow: 0 0 10px var(--highlight-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-header h1 i {
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-muted-color);
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group label i {
+            margin-right: 10px;
+            color: var(--accent-color);
+            width: 20px; 
+            text-align: center;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px 15px 50px; 
+            background-color: rgba(0,0,0,0.3);
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .form-group .input-icon {
+            position: absolute;
+            left: 18px;
+            top: calc(50% + 5px); 
+            transform: translateY(-50%);
+            color: var(--accent-color);
+            font-size: 1.1em;
+        }
+
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="tel"]:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--highlight-color);
+            box-shadow: 0 0 15px rgba(0, 255, 163, 0.5);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+            padding: 15px 20px; 
+        }
+        
+        .form-group textarea + .input-icon { display: none; } 
+        .form-group label + textarea { 
+             padding: 15px 20px;
+        }
+
+
+        .submit-btn {
+            background: linear-gradient(90deg, var(--accent-color), var(--highlight-color));
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.2em;
+            font-family: 'Orbitron', sans-serif;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .submit-btn i {
+            margin-right: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 255, 163, 0.4);
+        }
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+        .error-message {
+            color: #FF4747;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-content">
+            <div class="form-header">
+                <h1><i class="fas fa-satellite-dish"></i>feedback ngl wanzofc</h1>
+            </div>
+            <form id="feedbackForm" action="/submit-feedback" method="POST">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user-astronaut"></i>nama Anda:</label>
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" id="name" name="name" placeholder="Contoh: wfc" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope-open-text"></i>Alamat Email:</label>
+                    <i class="fas fa-at input-icon"></i>
+                    <input type="email" id="email" name="email" placeholder="Contoh: wanzofc@wanzofc.xyz" required>
+                </div>
+                <div class="form-group">
+                    <label for="whatsapp"><i class="fab fa-whatsapp-square"></i>Nomor WhatsApp:</label>
+                    <i class="fab fa-whatsapp input-icon"></i>
+                    <input type="tel" id="whatsapp" name="whatsapp" placeholder="Contoh: 62895402567224" required pattern="^\+?[0-9\s\-]{10,15}$">
+                    <small class="error-message" id="whatsappError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="feedback"><i class="fas fa-comment-dots"></i>Feedback / Laporan:</label>
+                    <textarea id="feedback" name="feedback" placeholder="Tuliskan masukan atau laporan Anda di sini..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i>Kirim Feedback
+                </button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const form = document.getElementById('feedbackForm');
+        const whatsappInput = document.getElementById('whatsapp');
+        const whatsappError = document.getElementById('whatsappError');
+
+        form.addEventListener('submit', function(event) {
+            const whatsappPattern = /^\+?[0-9\s\-]{10,15}$/;
+            if (!whatsappPattern.test(whatsappInput.value)) {
+                whatsappError.textContent = 'Format nomor WhatsApp tidak valid. Contoh: +62895402567224 atau +62895402567224';
+                whatsappInput.focus();
+                event.preventDefault(); 
+                return false;
+            } else {
+                whatsappError.textContent = ''; 
+            }
+        });
+        whatsappInput.addEventListener('input', function() {
+            if (whatsappError.textContent !== '') {
+                whatsappError.textContent = '';
+            }
+        });
+    </script>
+</body>
+</html>
